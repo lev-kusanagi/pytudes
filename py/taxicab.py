@@ -24,8 +24,9 @@ def compute_displacement(input, heading):
     distance = int(input[1:])
     print heading
     new_heading = heading_dict[heading] + turn
-    delta = distance * unit_vectors_dict[new_heading]
-    return np.array(delta), new_heading
+    print new_heading
+    delta = distance * np.array(unit_vectors_dict[new_heading])
+    return delta, new_heading
 
 def form_vector(input):
     """Return vector v, resulting from applying the sequence of inputs in
