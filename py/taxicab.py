@@ -15,6 +15,7 @@ def compute_displacement(input, heading):
     given the current heading
     """
     heading_dict = {'N': 1, 'E': 2, 'S': 3, 'W': 0}
+    reverse_heading_dict = {1: 'N', 2: 'E', 3: 'S', 0: 'W'}
     unit_vectors_dict = {1: [0, 1], 2: [1, 0], 3: [0, -1], 0: [-1, 0]}
     turn_direction = input[0]
     if turn_direction == 'R':
@@ -22,10 +23,10 @@ def compute_displacement(input, heading):
     elif turn_direction == 'L':
         turn = -1
     distance = int(input[1:])
-    print heading
-    new_heading = heading_dict[heading] + turn
-    delta = distance * unit_vectors_dict[new_heading]
-    return np.array(delta), new_heading
+    new_heading_num = (heading_dict[heading] + turn) %4
+    delta = distance * np.array(unit_vectors_dict[new_heading_num])
+    new_heading = reverse_heading_dict[new_heading_num]
+    return delta, new_heading
 
 def form_vector(input):
     """Return vector v, resulting from applying the sequence of inputs in
